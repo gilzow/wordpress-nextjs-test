@@ -3,9 +3,10 @@
 # Each route describes how an incoming URL is going
 # to be processed by Platform.sh.
 
-"https://{default}/":
+"https://api.{default}/":
     type: upstream
-    upstream: "app:http"
+    id: "api"
+    upstream: "api:http"
     cache:
         enabled: true
         # Base the cache on the session cookies. Ignore all other cookies.
@@ -16,6 +17,6 @@
             - '/^wp-settings-/'
             - '/^wp-postpass/'
 
-"https://www.{default}/":
+"https://www.api.{default}/":
     type: redirect
     to: "https://{default}/"
