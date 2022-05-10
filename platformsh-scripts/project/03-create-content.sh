@@ -15,7 +15,7 @@ else
         printf "        * Post data:       %s\n" "${POST_DATA}"
         printf "        * Number of posts: %d\n" "${NUM_POSTS}"
         printf "        ! Get some coffee, this will take a moment...\n"
-        php ${WP_SETUP}/project/03-create-nodes.php "${POST_DATA}" "${NUM_POSTS}"
+        php ${WP_SETUP}/project/03-create-posts.php "${POST_DATA}" "${NUM_POSTS}"
     else
         printf "    ✔ Skipping content generation.\n"
     fi
