@@ -20,3 +20,12 @@
 "https://www.api.{default}/":
     type: redirect
     to: "https://{default}/"
+
+https://www.{default}/:
+  type: redirect
+  to: "https://www.{default}/"
+https://{default}/:
+  type: upstream
+  primary: true
+  id: "client"
+  upstream: "nextjs:http"
