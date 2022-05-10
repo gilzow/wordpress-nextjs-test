@@ -7,7 +7,7 @@
 // @todo do we need to verify the values were passed in and what was passed is of the correct type?
 list(,$dataSrc,$numPosts) = $argv;
 //command for creating posts
-$pttrnPostCreate='wp post create --post_title="%s" --post_content="%s" --post_status=published --porcelain';
+$pttrnPostCreate='wp post create --post_title="%s" --post_content="%s" --post_status=publish --porcelain';
 //command for creating media
 $pttrnImgCreate='wp media import "%s" --title="%s" --alt="%s" --caption="%s" --post_id=%d --featured_image';
 
@@ -32,6 +32,7 @@ ENDPOST;
 	}
 
 	$postID = reset($aryOutput);
+	print "        * Created PostID $postID. Result from wp post create command is: $result\n";
 	unset($aryOutput, $result);
 
 	//now create the image media and attach it to the post as a featured image
