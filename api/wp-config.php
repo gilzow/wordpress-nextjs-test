@@ -112,6 +112,8 @@ define( 'WP_AUTO_UPDATE_CORE', false );
 // prefix.
 $table_prefix  = 'wp_';
 
+define('GRAPHQL_JWT_AUTH_SECRET_KEY',getenv('GRAPHQL_JWT_AUTH_SECRET_KEY'));
+
 // Default PHP settings.
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 100);
