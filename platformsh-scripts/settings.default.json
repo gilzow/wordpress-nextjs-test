@@ -1,0 +1,65 @@
+{
+  "project": {
+	"production": {
+	  "installed": false
+	},
+	"plugins": [
+	  "wp-graphql",
+	  "wp-graphql-jwt-authentication"
+	],
+	"consumer": {
+	  "role": {
+		"id": "oauth_consumer_role",
+		"label": "OAuth Consumer Role",
+		"permissions": [
+		  "bypass node access",
+		  "issue subrequests",
+		  "access user profiles"
+		]
+	  },
+	  "user": {
+		"id": "oauth_consumer_user",
+		"uid": null
+	  }
+	},
+	"posts": {
+	  "demo": {
+		"data": "03-dummy-posts.json",
+		"num_posts": 15
+	  }
+	}
+  },
+  "environment": {
+	"branch": null,
+	"key_path": "/app/private",
+	"consumer": {
+	  "id": "oauth_consumer_env",
+	  "uid": null,
+	  "secret": null,
+	  "label": "Next.js OAuth Env Consumer",
+	  "description": "This is the Next.js OAuth consumer. It was created programmatically by Platform.sh during this environment's first deploy to configure multi-app. Please do not delete.",
+	  "site": "Next.js OAuth Env Consumer Site"
+	},
+	"site": {
+	  "id": "nextjs_site",
+	  "label": "Next.js Site",
+	  "front_page": "/node",
+	  "resolver": {
+		"id": "node.article",
+		"type": "site_selector"
+	  },
+	  "preview_secret": null,
+	  "url": {
+		"base": null,
+		"preview": null,
+		"image_domain": null
+	  }
+	},
+	"client": {
+	  "url": {
+		"base": null,
+		"preview": null
+	  }
+	}
+  }
+}
