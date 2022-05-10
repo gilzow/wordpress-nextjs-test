@@ -48,10 +48,10 @@ else
     $WP_SETUP/project/01-install.sh
 
     # 2. Enable plugins.
-    $WP_SETUP/project/02-enable-modules.sh
+    $WP_SETUP/project/02-enable-plugins.sh
 
     # 3. Configure content.
-    $WP_SETUP/project/03-configure-content.sh
+    $WP_SETUP/project/03-create-content.sh
 fi
 ########################################################################################################################
 # c. Environment configuration: performed during the first push on a new environment.
