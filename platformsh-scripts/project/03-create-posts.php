@@ -16,9 +16,9 @@ $objDummyData = json_decode(file_get_contents($dataSrc, FILE_USE_INCLUDE_PATH), 
 for ($i=0; $i<$numPosts; ++$i) {
 	$copyright = $objDummyData[$i]->copyright ?? "Public";
 	$postBody=<<<ENDPOST
-	${objDummyData[$i]}->explanation
+	{$objDummyData[$i]->explanation}
 
-	$copyright (${objDummyData[$i]}->date)
+	$copyright ({$objDummyData[$i]->date})
 ENDPOST;
 
 	//first create the post
