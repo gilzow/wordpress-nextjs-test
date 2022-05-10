@@ -45,5 +45,5 @@ ENDPOST;
 
 	$command = vsprintf($pttrnImgCreate, $aryImage);
 	exec($command, $aryOutput, $result);
-	print "        * Post $i: ${objDummyData[$i]}->title\n";
+	print "        * Post $i: {$objDummyData[$i]->title}\n";
 }
