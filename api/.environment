@@ -17,7 +17,7 @@ stringlen=${#FRONTEND_URL}
 export FRONTEND_URL=$(echo $FRONTEND_URL | awk -v var=$stringlen '{ string=substr($0, 1, var - 1); print string; }' )
 
 # Demo installation variables.
-export WP_SETUP=$PLATFORM_APP_DIR/client/platformsh-scripts
+export WP_SETUP=$PLATFORM_APP_DIR/platformsh-scripts
 export INITIAL_DEMO_SETTINGS=$WP_SETUP/settings.default.json
 export ENV_SETTINGS=$PLATFORM_APP_DIR/deploy/settings.json
 export VARS_LOCAL=$PLATFORM_APP_DIR/deploy/platformsh.env
