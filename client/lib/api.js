@@ -125,7 +125,9 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
       slug
       date
       featuredImage {
-        sourceUrl
+        node {
+          sourceUrl
+        }
       }
       author {
         node {
