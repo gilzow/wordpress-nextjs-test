@@ -16,19 +16,25 @@ dependencies:
         composer/composer: '^2'
         wp-cli/wp-cli-bundle: "^2.4.0"
 
+variables:
+  env:
+    CREATE_DEMO_CONTENT: true
+
 hooks:
     build: |
         set -e
         # Copy manually-provided plugins into the plugins directory.
         # This allows manually-provided and composer-provided plugins to coexist.
         rsync -a plugins/* wordpress/wp-content/plugins/
-
+    deploy: !include
+      type: string
+      path: platformsh-scripts/hooks.deploy.sh
 # The relationships of the application with services or other applications.
 # The left-hand side is the name of the relationship as it will be exposed
 # to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
 # side is in the form `<service name>:<endpoint name>`.
 relationships:
-    database: "db:mysql"
+    database: "dba:mysql"
 
 # The configuration of app when it is exposed to the web.
 web:
@@ -72,7 +78,10 @@ mounts:
     "wordpress/wp-content/uploads":
         source: local
         source_path: "uploads"
-
+    deploy:
+      source: service
+      service: files
+      source_path: deploy
 
 source:
   operations:
