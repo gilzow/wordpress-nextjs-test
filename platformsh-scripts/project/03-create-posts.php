@@ -32,7 +32,7 @@ ENDPOST;
 	}
 
 	$postID = reset($aryOutput);
-	print "        * Created PostID $postID. Result from wp post create command is: $result\n";
+	//print "        * Created PostID $postID. Result from wp post create command is: $result\n";
 	unset($aryOutput, $result);
 
 	//now create the image media and attach it to the post as a featured image
@@ -46,5 +46,6 @@ ENDPOST;
 
 	$command = vsprintf($pttrnImgCreate, $aryImage);
 	exec($command, $aryOutput, $result);
-	print "        * Post $i: {$objDummyData[$i]->title}\n";
+	print "        * Post $postID: {$objDummyData[$i]->title}\n";
+	unset($aryOutput, $result);
 }
