@@ -8,7 +8,7 @@
 printf "    ✔ Installing WordPress \n"
 
 # 1. Define initial admin password.
-INIT_ADMIN_PASS=${PLATFORM_PROJECT_ENTROPY}
+INIT_ADMIN_PASS=$(echo -n "${PLATFORM_PROJECT_ENTROPY}" | sha1sum | awk '{print $1}')
 
 # 2. Install the site.
 # We need:
@@ -21,7 +21,7 @@ adminEmail="admin@example.com"
 siteTitle="WordPress Headless"
 siteURL=$(echo ${PLATFORM_ROUTES} | base64 --decode | jq -r 'to_entries[] | select(.value.id == "api") | .key')
 
-wp core install --url="${siteURL}" --title="${siteTitle}" --admin_user="${adminName}" --admin_password="${INIT_ADMIN_PASS}"
+wp core install --url="${siteURL}" --title="${siteTitle}" --admin_user="${adminName}" --admin_password="${INIT_ADMIN_PASS}" --admin_email="${adminEmail}"
 # @todo should we check for an error before reporting success?
 
 # 3. Warn the user about the initial admin account.
