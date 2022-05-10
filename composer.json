@@ -32,15 +32,25 @@
     "wpackagist-theme/twentytwentyone": "^1.5",
     "wpackagist-theme/twentytwentytwo": "^1.1",
     "wpackagist-theme/twentytwenty": "^1.9",
-    "wpackagist-plugin/akismet": "^4.2"
+    "wpackagist-plugin/akismet": "^4.2",
+    "wpackagist-plugin/wp-graphql": "^1.8",
+    "wp-graphql/wp-graphql-jwt-authentication": "^0.5.1"
   },
   "config": {
+    "allow-plugins": {
+      "johnpbloch/wordpress-core-installer": true,
+      "composer/installers": true
+    }
   },
   "repositories": [
     {
       "type": "composer",
       "url": "https://wpackagist.org"
-    }
+    },
+	{
+	  "type": "vcs",
+	  "url": "https://github.com/wp-graphql/wp-graphql-jwt-authentication"
+	}
   ],
   "scripts": {
     "subdirComposer": [
