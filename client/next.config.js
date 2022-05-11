@@ -5,4 +5,7 @@ module.exports = {
       'secure.gravatar.com',
     ],
   },
+  generateBuildId: async () => {
+	  return process.env.PLATFORM_TREE_ID
+  }
 }
