@@ -33,8 +33,7 @@
     "wpackagist-theme/twentytwentytwo": "^1.1",
     "wpackagist-theme/twentytwenty": "^1.9",
     "wpackagist-plugin/akismet": "^4.2",
-    "wpackagist-plugin/wp-graphql": "^1.8",
-    "wp-graphql/wp-graphql-jwt-authentication": "^0.5.1"
+    "wpackagist-plugin/wp-graphql": "^1.8"
   },
   "config": {
     "allow-plugins": {
