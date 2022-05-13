@@ -3,6 +3,16 @@ import { getPreviewPost } from '../../lib/api'
 export default async function preview(req, res) {
   const { secret, id, slug } = req.query
 
+  if ( !process.env.WORDPRESS_PREVIEW_SECRET ) {
+	return res.status(401).json({ message: 'env secret not set.' })
+  }
+
+  if ( secret !== process.env.WORDPRESS_PREVIEW_SECRET ) {
+	  return res.status(401).json({
+		  message: 'secret given doesnt match secret passed in' 
+	  })
+  }
+
   // Check the secret and next parameters
   // This secret should only be known by this API route
   if (
