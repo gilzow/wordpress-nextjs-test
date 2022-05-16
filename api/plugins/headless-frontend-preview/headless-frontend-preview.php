@@ -24,5 +24,5 @@ if((null !== $previewURL = getenv('FRONTEND_URL'))
 		];
 
 		return $previewURL.$previewLocation.'?'.http_build_query($urlQuery);
-	});
+	},10,2);
 }
