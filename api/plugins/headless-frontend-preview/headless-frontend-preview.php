@@ -25,4 +25,10 @@ if((false !== $previewURL = getenv('FRONTEND_URL'))
 
 		return $previewURL.$previewLocation.'?'.http_build_query($urlQuery);
 	},10,2);
+
+	add_filter('rest_prepare_post', function ($response, $post){
+		if ('draft' == $post->post_status) {
+			$response->data['link'] = get_preview_post_link($post);
+		}
+	}, 10, 2);
 }
