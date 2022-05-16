@@ -12,9 +12,9 @@
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
-if((null !== $previewURL = getenv('FRONTEND_URL'))
-	&& (null !== $previewSecret = getenv('WORDPRESS_PREVIEW_SECRET'))
-	&& (null !== $previewLocation = getenv('FRONTEND_PREVIEW_LOCATION'))
+if((false !== $previewURL = getenv('FRONTEND_URL'))
+	&& (false !== $previewSecret = getenv('WORDPRESS_PREVIEW_SECRET'))
+	&& (false !== $previewLocation = getenv('FRONTEND_PREVIEW_LOCATION'))
 )
 {
 	add_filter('preview_post_link', function ($previewLink, $post) use ($previewURL, $previewSecret, $previewLocation){
