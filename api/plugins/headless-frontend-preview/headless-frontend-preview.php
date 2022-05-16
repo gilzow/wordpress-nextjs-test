@@ -30,5 +30,6 @@ if((false !== $previewURL = getenv('FRONTEND_URL'))
 		if ('draft' == $post->post_status) {
 			$response->data['link'] = get_preview_post_link($post);
 		}
+		return $response;
 	}, 10, 2);
 }
