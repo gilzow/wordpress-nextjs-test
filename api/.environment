@@ -27,3 +27,5 @@ export VARS_PSH=$PLATFORM_APP_DIR/deploy/platformsh.environment
 # we'll use the platform entropy value combined with a random value (fbHUh3hZ). If you change this value, you'll need
 # to redeploy the nextjs app so the deploy scripts can recreate the
 export GRAPHQL_JWT_AUTH_SECRET_KEY=$(echo -n "${PLATFORM_PROJECT_ENTROPY}fbHUh3hZ" | sha1sum | awk '{print $1}')
+# location on the nextjs frontend where we can preview posts
+export FRONTEND_PREVIEW_LOCATION='/api/preview'
