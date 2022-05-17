@@ -7,20 +7,10 @@
 	  "wp-graphql",
 	  "wp-graphql-jwt-authentication"
 	],
-	"consumer": {
-	  "role": {
-		"id": "oauth_consumer_role",
-		"label": "OAuth Consumer Role",
-		"permissions": [
-		  "bypass node access",
-		  "issue subrequests",
-		  "access user profiles"
-		]
-	  },
-	  "user": {
-		"id": "oauth_consumer_user",
-		"uid": null
-	  }
+	"user": {
+	  "name": "client_wpgraphql_user",
+	  "id": null,
+	  "email": "wpgraphql@example.com"
 	},
 	"posts": {
 	  "demo": {
