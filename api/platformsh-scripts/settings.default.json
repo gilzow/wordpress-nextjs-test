@@ -29,7 +29,7 @@
 	  "email": "wpgraphql@example.com",
 	  "secret" : null,
 	  "label": "Next.js OAuth Env Consumer",
-	  "description": "This is the Next.js OAuth consumer. It was created programmatically by Platform.sh during this environment's first deploy to configure multi-app. Please do not delete.",
+	  "description": "This is the Next.js user account. It was created programmatically by Platform.sh during this environment's first deploy to enable post previews. Please do not delete.",
 	  "site": "Next.js OAuth Env Consumer Site",
 	  "application_password_name": "headless-preview"
 	},
