@@ -36,8 +36,12 @@ if $(wp user application-password exists "${previewUser}" "${previewAppName}"); 
 	wp user application-password delete "${previewUser}" "${previewAppUUID}"
 fi
 
+printf "   Creating application password %s for user %s..." "${previewAppName}" "${previewUser}"
+
 # we need to create and store an application password that we can then turn around and use with graphql to get a refresh token
 previewAppPassword=$(wp user application-password create "${previewUser}" "$previewAppName" --porcelain)
+
+printf " ✔\n"
 
 #now we can get our refresh token!
 #mutation=printf '{ "mutation": "mutation Login { login( input: { clientMutationId: \"%s\" password: \"%s\" username: \"%s\" } ) { refreshToken } }" }' "${previewAppName}${RANDOM}"
@@ -64,7 +68,8 @@ previewAppMutation=$(echo "${previewAppMutation}" | jq -r tostring)
 UPDATED_SETTINGS=$(jq --arg MUTATION "${previewAppMutation}" '.environment.api.login_mutation = $MUTATION' "$ENV_SETTINGS")
 echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
 
+printf "   Retrieving wpGraphQL refresh token for user %s..." "${previewUser}"
 wpAuthRereshToken=$(curl -H "Content-type: application/json" -d "${previewAppMutation}"  -X POST "${wpGraphqlURL}" | jq -r '.data.login.refreshToken // "error. investigate"')
-
+printf " ✔\n"
 UPDATED_SETTINGS=$(jq --arg WPTOKEN "${wpAuthRereshToken}" '.environment.consumer.secret = $WPTOKEN' "$ENV_SETTINGS")
 echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
