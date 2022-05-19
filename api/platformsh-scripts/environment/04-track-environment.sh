@@ -44,7 +44,7 @@ printf "* Preparing credentials to hand off to frontend container.\n"
 # WORDPRESS_API_URL
 wpGraphqlURL=$(jq -r '.environment.api.url.graphql' < "${ENV_SETTINGS}")
 # WORDPRESS_AUTH_REFRESH_TOKEN
-wpAuthRefreshToken=$(jq -r '.environment.api.url.graphql' < "${ENV_SETTINGS}")
+wpAuthRefreshToken=$(jq -r '.environment.consumer.secret' < "${ENV_SETTINGS}")
 # WORDPRESS_PREVIEW_SECRET - already defined in .environment
 # IMAGE_DOMAIN - just the raw domain of our api URL
 # @todo is it possible this will ever need to be a different domain?
@@ -55,7 +55,7 @@ imageDomain="${wpBaseURL//https:\/\//}"
 # b. Create the .env file used for local development.
 
 printf "* Writing remote configuration.\n"
-printf "# This .environment file is generated programmatically within the backend Drupal app for each Platform.sh
+printf "# This .environment file is generated programmatically within the backend WordPress app for each Platform.sh
 # environment and stored within an network storage mount so it can be shared between apps.
 export WORDPRESS_API_URL=%s
 export WORDPRESS_PREVIEW_SECRET=%s

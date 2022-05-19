@@ -23,6 +23,7 @@
 
 previewUser=$(jq -r '.environment.consumer.name' < "${ENV_SETTINGS}");
 previewAppName=$(jq -r '.environment.consumer.application_password_name' < "${ENV_SETTINGS}")
+wpGraphqlURL=$(jq -r '.environment.api.url.graphql' < "${ENV_SETTINGS}")
 
 # see if we already have an password for the given app name, if so, delete it
 # We dont want to store a *password* on the file system, and we can't set or update an application password. Therefore,
@@ -39,9 +40,9 @@ fi
 previewAppPassword=$(wp user application-password create "${previewUser}" "$previewAppName" --porcelain)
 
 #now we can get our refresh token!
-mutation=printf '{ "mutation": "mutation Login { login( input: { clientMutationId: \"%s\" password: \"%s\" username: \"%s\" } ) { refreshToken } }" }' "${previewAppName}${RANDOM}"
-curl -H "Content-Type: application/json" -d ''
-{ "mutation": "mutation Login { login( input: { clientMutationId: \"uniqueId\" password: \"your_password\" username: \"your_username\" } ) { refreshToken } }" }
+#mutation=printf '{ "mutation": "mutation Login { login( input: { clientMutationId: \"%s\" password: \"%s\" username: \"%s\" } ) { refreshToken } }" }' "${previewAppName}${RANDOM}"
+#curl -H "Content-Type: application/json" -d ''
+#{ "mutation": "mutation Login { login( input: { clientMutationId: \"uniqueId\" password: \"your_password\" username: \"your_username\" } ) { refreshToken } }" }
 
 previewAppMutation=$(printf '{
 	"query": "mutation Login {
@@ -59,7 +60,7 @@ previewAppMutation=$(printf '{
 
 # still need to get WORDPRESS_API_URL from the settings file
 
-WORDPRESS_AUTH_REFRESH_TOKEN=$(curl -H "Content-type: application/json" -d ''  -X POST https://api.test1-dnhq5ga-z6d5mdnrun4va.ca-1.platformsh.site/graphql | jq -r '.data.login.refreshToken')
+wpAuthRereshToken=$(curl -H "Content-type: application/json" -d "${previewAppMutation}"  -X POST "${wpGraphqlURL}" | jq -r '.data.login.refreshToken // "error. investigate"')
 
-UPDATED_SETTINGS=$(jq --arg WPTOKEN "${wpGraphqlUserID}" '.environment.consumer.secret = $WPTOKEN' "$ENV_SETTINGS")
+UPDATED_SETTINGS=$(jq --arg WPTOKEN "${wpAuthRereshToken}" '.environment.consumer.secret = $WPTOKEN' "$ENV_SETTINGS")
 echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
