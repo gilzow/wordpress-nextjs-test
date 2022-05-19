@@ -7,7 +7,8 @@ wpGrahpqlUserDescription=$(jq -r '.environment.consumer.description' < "${ENV_SE
 # create our user that will communicate via GraphQL - HAS to be an administrator in order to retrieve draft posts
 # @todo error check?
 wpGraphqlUserID=$(wp user create "${wpGrapqlUser}" "${wpGraphqlEmail}" --role=administrator --porcelain)
-# add our description to the user so they know not to
+printf "    ✔ Created the account %s to use for previewing posts.\n" "${wpGrapqlUser}"
+# add our description to the user so they know not to delete or remove
 wp user meta update "${wpGraphqlUserID}" description "${wpGrahpqlUserDescription}"
 
 # save the users' ID
