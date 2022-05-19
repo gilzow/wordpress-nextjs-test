@@ -9,6 +9,7 @@ wpGrahpqlUserDescription=$(jq -r '.environment.consumer.description' < "${ENV_SE
 wpGraphqlUserID=$(wp user create "${wpGrapqlUser}" "${wpGraphqlEmail}" --role=administrator --porcelain)
 printf "    ✔ Created the account %s to use for previewing posts.\n" "${wpGrapqlUser}"
 # add our description to the user so they know not to delete or remove
+printf "    ✔ Adding description to user %s\n" "${wpGrapqlUser}"
 wp user meta update "${wpGraphqlUserID}" description "${wpGrahpqlUserDescription}"
 
 # save the users' ID
