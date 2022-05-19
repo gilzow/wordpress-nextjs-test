@@ -10,8 +10,8 @@ if [ -z ${CREATE_DEMO_CONTENT+x} ]; then
 else
     if [[ "$CREATE_DEMO_CONTENT" == true ]]; then
         printf "    ✔ Generating demo posts (see %s).\n" "${demoPostsLink}"
-        NUM_POSTS=$(cat "$ENV_SETTINGS" | jq -r '.project.posts.demo.num_posts')
-        POST_DATA=$(cat "$ENV_SETTINGS" | jq -r '.project.posts.demo.data')
+        NUM_POSTS=$(jq -r '.project.posts.demo.num_posts' < "${ENV_SETTINGS}")
+        POST_DATA=$(jq -r '.project.posts.demo.data' < "${ENV_SETTINGS}")
         printf "        * Post data:       %s\n" "${POST_DATA}"
         printf "        * Number of posts: %d\n" "${NUM_POSTS}"
         printf "        ! Get some coffee, this will take a moment...\n"
