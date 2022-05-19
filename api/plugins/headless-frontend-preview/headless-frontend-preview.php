@@ -23,7 +23,7 @@ if((false !== $previewURL = getenv('FRONTEND_URL'))
 			'secret'=> $previewSecret,
 		];
 
-		return $previewURL.$previewLocation.'?'.http_build_query($urlQuery);
+		return $previewLocation.'?'.http_build_query($urlQuery);
 	},10,2);
 
 	add_filter('rest_prepare_post', function ($response, $post){
