@@ -23,7 +23,7 @@ fi
 
 graphqlURL="${apiBase}${endPoint}"
 
-UPDATED_SETTINGS=$(jq --arg GRAPHQLURL "${wpGraphqlUserID}" '.environment.api.url.graphql = $GRAPHQLURL' "${ENV_SETTINGS}")
+UPDATED_SETTINGS=$(jq --arg GRAPHQLURL "${graphqlURL}" '.environment.api.url.graphql = $GRAPHQLURL' "${ENV_SETTINGS}")
 echo "${UPDATED_SETTINGS}" > "${ENV_SETTINGS}"
 
 
