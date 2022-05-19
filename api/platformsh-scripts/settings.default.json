@@ -3,14 +3,15 @@
 	"production": {
 	  "installed": false
 	},
+	"title": "Headless WordPress",
 	"plugins": [
 	  "wp-graphql",
-	  "wp-graphql-jwt-authentication"
+	  "wp-graphql-jwt-authentication",
+	  "headless-frontend-preview"
 	],
-	"user": {
-	  "name": "client_wpgraphql_user",
-	  "id": null,
-	  "email": "wpgraphql@example.com"
+	"admin_user": {
+	  "name": "admin",
+	  "email": "admin@example.com"
 	},
 	"posts": {
 	  "demo": {
@@ -23,14 +24,16 @@
 	"branch": null,
 	"key_path": "/app/private",
 	"consumer": {
-	  "id": "oauth_consumer_env",
-	  "uid": null,
-	  "secret": null,
+	  "name": "client_wpgraphql_user",
+	  "id": null,
+	  "email": "wpgraphql@example.com",
+	  "secret" : null,
 	  "label": "Next.js OAuth Env Consumer",
 	  "description": "This is the Next.js OAuth consumer. It was created programmatically by Platform.sh during this environment's first deploy to configure multi-app. Please do not delete.",
-	  "site": "Next.js OAuth Env Consumer Site"
+	  "site": "Next.js OAuth Env Consumer Site",
+	  "application_password_name": "headless-preview"
 	},
-	"site": {
+	"api": {
 	  "id": "nextjs_site",
 	  "label": "Next.js Site",
 	  "front_page": "/node",
@@ -42,7 +45,8 @@
 	  "url": {
 		"base": null,
 		"preview": null,
-		"image_domain": null
+		"image_domain": null,
+		"graphql": null
 	  }
 	},
 	"client": {
