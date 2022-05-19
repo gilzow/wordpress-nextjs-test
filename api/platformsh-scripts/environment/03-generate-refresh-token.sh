@@ -63,7 +63,12 @@ previewAppMutation=$(printf '{
   }' "${previewAppName}${RANDOM}" "${previewAppPassword}" "${previewUser}")
 
 # now flatten out the json so we can more easily send it via curl
-previewAppMutation=$(echo "${previewAppMutation}" | tr '\n' ' ')
+#\011 HT    '\t' (horizontal tab)
+#\012 LF    '\n' (new line)
+#\013 VT    '\v' (vertical tab)
+#\014 FF    '\f' (form feed)
+#\015 CR    '\r' (carriage ret)
+previewAppMutation=$(echo "${previewAppMutation}" | tr -d '\011\012\013\014\015')
 
 UPDATED_SETTINGS=$(jq --arg MUTATION "${previewAppMutation}" '.environment.api.login_mutation = $MUTATION' "$ENV_SETTINGS")
 echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
