@@ -9,7 +9,7 @@
 printf "    ✔ Enabing plugins (see https://github.com/vercel/next.js/tree/canary/examples/cms-wordpress).\n"
 
 # 1. Get the list of plugins and enable them.
-for plugin in $(cat $ENV_SETTINGS | jq -r '.project.plugins []'); do
+for plugin in $(jq -r '.project.plugins []' < "${ENV_SETTINGS}"); do
 	printf "        * %s\n" "${plugin}"
 	wp plugin activate "${plugin}"
 done
