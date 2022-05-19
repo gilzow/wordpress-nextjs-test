@@ -75,7 +75,7 @@ sed 's/export //' "${VARS_PSH}" > "${VARS_LOCAL}"
 #now we just need to adjust the message in the file. This is a .env file not a .environment file
 sed -i 's/ .env / .environment /' "${VARS_LOCAL}"
 #and we'll use it locally not between apps
-sed  -i 's/ shared between apps/ used locally' "${VARS_LOCAL}"
+sed  -i 's/ shared between apps/ used locally/' "${VARS_LOCAL}"
 
 echo "${SPLIT_LINE}"
 cat "${VARS_LOCAL}"
