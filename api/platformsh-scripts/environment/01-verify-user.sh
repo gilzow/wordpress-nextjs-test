@@ -6,7 +6,7 @@ previewUser=$(jq -r '.environment.consumer.name' < "${ENV_SETTINGS}");
 # wp user get foobar &> /dev/null;
 
 if ! $(wp user get "${previewUser}" &> /dev/null); then
-	printf "User %s doesn't exist. Creating..." "${previewUser}";
+	printf "* User %s doesn't exist. Creating... \n" "${previewUser}";
 	. "${WP_SETUP}/project/04-create-user.sh"
 fi
 
