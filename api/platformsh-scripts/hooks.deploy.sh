@@ -55,35 +55,35 @@ else
 fi
 ########################################################################################################################
 # c. Environment configuration: performed during the first push on a new environment.
-#if [ -f "$ENV_SETTINGS" ]; then
-#
-#    printf "* Configuring the environment.\n"
-#    # 1. Check the current environment and project status.
-#    PROD_INSTALL=$(cat $ENV_SETTINGS | jq -r '.project.production.installed')
-#    PREPPED_ENV=$(cat $ENV_SETTINGS | jq -r '.environment.branch')
+if [ -f "$ENV_SETTINGS" ]; then
 
-#   # 2. Run setup if a) very first project deploy on production environment, or b) first deploy on a new environment.
-#    if [ "$PROD_INSTALL" = false ]  || [ "$PREPPED_ENV" != "$PLATFORM_BRANCH" ]; then
-#
-#        # a. Clear the previous environment's configuration.
-#        $DRUPAL_SETUP/environment/01-reset-config.sh "$PROD_INSTALL" "$PREPPED_ENV"
-#
+    printf "* Configuring the environment.\n"
+    # 1. Check the current environment and project status.
+    PROD_INSTALL=$(jq -r '.project.production.installed' < "${ENV_SETTINGS}")
+    PREPPED_ENV=$(jq -r '.environment.branch' < "${ENV_SETTINGS}")
+
+   # 2. Run setup if a) very first project deploy on production environment, or b) first deploy on a new environment.
+    if [ "$PROD_INSTALL" = false ]  || [ "$PREPPED_ENV" != "$PLATFORM_BRANCH" ]; then
+
+        # a. Clear the previous environment's configuration.
+        "${WP_SETUP}"/environment/01-verify-user.sh "$PROD_INSTALL" "$PREPPED_ENV"
+
         # b. Generate keys and create the consumer.
-#        $DRUPAL_SETUP/environment/02-create-consumer.sh
+        "${WP_SETUP}"/environment/02-get-graphql-endpoint.sh
 
-        # c. Create Next.js site consumer and configure previews.
-#        $DRUPAL_SETUP/environment/03-create-site.sh
+       # c. Create Next.js site consumer and configure previews.
+        "${WP_SETUP}"/environment/03-generate-refresh-token.sh
 
-        # d. Track the installation and configure the frontend.
-#       $DRUPAL_SETUP/environment/04-track-environment.sh
+       # d. Track the installation and configure the frontend.
+       "${WP_SETUP}"/environment/04-track-environment.sh
 
-#    else
-#        printf "* Environment already prepped for frontend. Skipping setup.\n"
-#    fi
-#else
-#    printf "✗ Something went wrong during the installation phase. Investigate!\033"
-#    exit 1
-#fi
+    else
+        printf "* Environment already prepped for frontend. Skipping setup.\n"
+    fi
+else
+    printf "✗ Something went wrong during the installation phase. Investigate!\033"
+    exit 1
+fi
 ########################################################################################################################
 # d. WordPress tasks: performed on every deployment.
 wp cache flush
