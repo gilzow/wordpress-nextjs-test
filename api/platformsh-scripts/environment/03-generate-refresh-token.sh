@@ -56,9 +56,13 @@ previewAppMutation=$(printf '{
 	  	refreshToken
 	  }
 	}"
-  }' "${previewAppName}${RANDOM}" "${previewAppPassword}" "${previewUser}" | jq -r tostring)
+  }' "${previewAppName}${RANDOM}" "${previewAppPassword}" "${previewUser}")
 
-# still need to get WORDPRESS_API_URL from the settings file
+# now flatten out the json so we can more easily send it via curl
+previewAppMutation=$(echo "${previewAppMutation}" | jq -r tostring)
+
+UPDATED_SETTINGS=$(jq --arg MUTATION "${previewAppMutation}" '.environment.api.login_mutation = $MUTATION' "$ENV_SETTINGS")
+echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
 
 wpAuthRereshToken=$(curl -H "Content-type: application/json" -d "${previewAppMutation}"  -X POST "${wpGraphqlURL}" | jq -r '.data.login.refreshToken // "error. investigate"')
 

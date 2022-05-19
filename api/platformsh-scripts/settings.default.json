@@ -47,7 +47,8 @@
 		"preview": null,
 		"image_domain": null,
 		"graphql": null
-	  }
+	  },
+	  "login_mutation": null
 	},
 	"client": {
 	  "url": {
