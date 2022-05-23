@@ -66,16 +66,19 @@ if [ -f "$ENV_SETTINGS" ]; then
     if [ "$PROD_INSTALL" = false ]  || [ "$PREPPED_ENV" != "$PLATFORM_BRANCH" ]; then
 
         # a. Clear the previous environment's configuration.
-        "${WP_SETUP}"/environment/01-verify-user.sh "$PROD_INSTALL" "$PREPPED_ENV"
+        "${WP_SETUP}"/environment/01-verify-user.sh
 
-        # b. Generate keys and create the consumer.
-        "${WP_SETUP}"/environment/02-get-graphql-endpoint.sh
+				# b. Update environment URLS
+				"${WP_SETUP}"/environment/02-update-urls.sh
 
-       # c. Create Next.js site consumer and configure previews.
-        "${WP_SETUP}"/environment/03-generate-refresh-token.sh
+        # c. Get & set our GraphQL endpoint
+        "${WP_SETUP}"/environment/04-get-graphql-endpoint.sh
+
+        # d. Generate our new refreshToken.
+        "${WP_SETUP}"/environment/04-generate-refresh-token.sh
 
        # d. Track the installation and configure the frontend.
-       "${WP_SETUP}"/environment/04-track-environment.sh
+       "${WP_SETUP}"/environment/05-track-environment.sh
 
     else
         printf "* Environment already prepped for frontend. Skipping setup.\n"
