@@ -32,7 +32,7 @@
     "wpackagist-theme/twentytwenty": "^1.9",
     "wpackagist-plugin/akismet": "^4.2",
     "wpackagist-plugin/wp-graphql": "^1.8",
-	"gilzow/wp-graphql-jwt-authentication-wp-cli": "dev-plugin"
+	"wp-graphql/wp-graphql-jwt-authentication": "^0.5.2"
   },
   "config": {
     "allow-plugins": {
@@ -48,10 +48,6 @@
 	{
 	  "type": "vcs",
 	  "url": "https://github.com/wp-graphql/wp-graphql-jwt-authentication"
-	},
-	{
-	  "type": "vcs",
-	  "url": "https://github.com/gilzow/wp-graphql-jwt-authentication-wp-cli.git"
 	}
   ],
   "scripts": {
