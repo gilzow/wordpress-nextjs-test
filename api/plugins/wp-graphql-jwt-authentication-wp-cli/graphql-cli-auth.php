@@ -12,7 +12,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 use WP_CLI\Utils;
-if ( ! defined( 'ABSPATH' ) || ! defined( 'WP_CLI') || (defined( 'WP_CLI') && ! WP_CLI) ) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
