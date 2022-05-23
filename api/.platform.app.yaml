@@ -13,9 +13,9 @@ build:
 
 dependencies:
     php:
-        composer/composer: '^2'
-        wp-cli/wp-cli-bundle: "^2.4.0",
-        "psy/psysh": "^0.11.2"
+      composer/composer: '^2'
+      wp-cli/wp-cli-bundle: "^2.4.0",
+      psy/psysh: "^0.11.2"
 
 variables:
   env:
