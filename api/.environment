@@ -31,7 +31,7 @@ export GRAPHQL_JWT_AUTH_SECRET_KEY=$(echo -n "${PLATFORM_PROJECT_ENTROPY}${PLATF
 export FRONTEND_PREVIEW_LOCATION="${FRONTEND_URL}/api/preview"
 # We need a secret that is shared with both apps to allow for viewing preview posts.
 # @see https://github.com/vercel/next.js/tree/canary/examples/cms-wordpress#step-5-add-authentication-for-preview-mode-optional
-# We want to make sure the secret is different between environments, is URL friendly but otherwise does not need to
+# We want to make sure the secret is different between environments, is URL friendly but otherwise does not need to be
 # ultra secure (from the docs: "any random string"). We'll use a truncated sha1 sum of entropy plus branch name
 export WORDPRESS_PREVIEW_SECRET=$(echo -n "${PLATFORM_PROJECT_ENTROPY}${PLATFORM_BRANCH}" | sha1sum | awk '{string=substr($1,1,20); print string;}')
 #if [ -f $VARS_PSH ]; then
