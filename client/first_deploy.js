@@ -32,7 +32,7 @@ for (route in routes) {
 }
 
 const backendLogin = `${backendURL}wp-login.php`;
-const credentialUpdate = `${backendURL}user/1/edit`
+const credentialUpdate = `${backendURL}wp-admin/profile.php`
 
 const outputString = `
 
