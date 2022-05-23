@@ -7,7 +7,8 @@
 	"plugins": [
 	  "wp-graphql",
 	  "wp-graphql-jwt-authentication",
-	  "headless-frontend-preview"
+	  "headless-frontend-preview",
+	  "wp-graphql-jwt-authentication-wp-cli"
 	],
 	"admin_user": {
 	  "name": "admin",
