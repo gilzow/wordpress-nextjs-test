@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) || ! defined( 'WP_CLI') || (defined( 'WP_CLI') && ! 
 /**
  * Allows for retrieval of a wpGraphQL refresh token to be used to retrieve draft posts
  */
-class WPGraphQL_Auth_CLI_Command extends WP_CLI_Command {
+class WPGraphQL_Auth_CLI_Command {
     protected array $requiredPlugins = ['wp-graphql','wp-graphql-jwt-authentication'];
     protected bool $appPasswordsAvailable;
     protected array $defaults = ['return'=>'refreshToken','format'=>'json'];
