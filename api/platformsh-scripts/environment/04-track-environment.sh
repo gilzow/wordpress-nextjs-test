@@ -49,8 +49,7 @@ wpAuthRefreshToken=$(jq -r '.environment.consumer.secret' < "${ENV_SETTINGS}")
 # IMAGE_DOMAIN - just the raw domain of our api URL
 # @todo is it possible this will ever need to be a different domain?
 wpBaseURL=$(jq -r '.environment.api.url.base' < "${ENV_SETTINGS}")
-imageDomain="${wpBaseURL//https:\/\//}"
-
+imageDomain=$(jq -r '.environment.api.url.base' < "${ENV_SETTINGS}" | awk -F/ '{print $3}')
 
 # b. Create the .env file used for local development.
 
