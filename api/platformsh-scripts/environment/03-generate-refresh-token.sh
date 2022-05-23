@@ -48,19 +48,19 @@ printf " ✔\n"
 #curl -H "Content-Type: application/json" -d ''
 #{ "mutation": "mutation Login { login( input: { clientMutationId: \"uniqueId\" password: \"your_password\" username: \"your_username\" } ) { refreshToken } }" }
 
-previewAppMutation=$(printf '{
-	"query": "mutation Login {
-	  login(
-	  	input: {
-	  	  clientMutationId: \\"%s\\"
-	  	  password: \\"%s\\"
-	  	  username: \\"%s\\"
-	  	}
-	  ) {
-	  	refreshToken
-	  }
-	}"
-  }' "${previewAppName}${RANDOM}" "${previewAppPassword}" "${previewUser}")
+#previewAppMutation=$(printf '{
+#	"query": "mutation Login {
+#	  login(
+#	  	input: {
+#	  	  clientMutationId: \\"%s\\"
+#	  	  password: \\"%s\\"
+#	  	  username: \\"%s\\"
+#	  	}
+#	  ) {
+#	  	refreshToken
+#	  }
+#	}"
+#  }' "${previewAppName}${RANDOM}" "${previewAppPassword}" "${previewUser}")
 
 # now flatten out the json so we can more easily send it via curl
 #\011 HT    '\t' (horizontal tab)
@@ -68,13 +68,17 @@ previewAppMutation=$(printf '{
 #\013 VT    '\v' (vertical tab)
 #\014 FF    '\f' (form feed)
 #\015 CR    '\r' (carriage ret)
-previewAppMutation=$(echo "${previewAppMutation}" | tr -d '\011\012\013\014\015')
+#previewAppMutation=$(echo "${previewAppMutation}" | tr -d '\011\012\013\014\015')
 
-UPDATED_SETTINGS=$(jq --arg MUTATION "${previewAppMutation}" '.environment.api.login_mutation = $MUTATION' "$ENV_SETTINGS")
-echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
+#UPDATED_SETTINGS=$(jq --arg MUTATION "${previewAppMutation}" '.environment.api.login_mutation = $MUTATION' "$ENV_SETTINGS")
 
-printf "   Retrieving wpGraphQL refresh token for user %s..." "${previewUser}"
-wpAuthRereshToken=$(curl -H "Content-type: application/json" -d "${previewAppMutation}"  -X POST "${wpGraphqlURL}" | jq -r '.data.login.refreshToken // "error. investigate"')
+#echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
+#
+#printf "   Retrieving wpGraphQL refresh token for user %s..." "${previewUser}"
+#wpAuthRereshToken=$(curl -H "Content-type: application/json" -d "${previewAppMutation}"  -X POST "${wpGraphqlURL}" | jq -r '.data.login.refreshToken // "error. investigate"')
+
+wpAuthRereshToken=$(wp graphql_auth get-graphql-token "${previewUser}" "${previewAppPassword}" --porcelain)
+
 printf " ✔\n"
 UPDATED_SETTINGS=$(jq --arg WPTOKEN "${wpAuthRereshToken}" '.environment.consumer.secret = $WPTOKEN' "$ENV_SETTINGS")
 echo "${UPDATED_SETTINGS}" > "$ENV_SETTINGS"
